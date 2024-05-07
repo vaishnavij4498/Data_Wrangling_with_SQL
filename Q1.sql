@@ -35,4 +35,3 @@ ORDER BY
     AbsoluteValueDifference DESC, 
     TotalNBOrders, 
     c.CustomerName;
-
