@@ -1,0 +1,70 @@
+SELECT s.student_id, s.student_name, sub.subject_name, COUNT(e.subject_name) as attended_exams
+FROM Students as s
+JOIN Subjects as sub 
+LEFT JOIN Examinations as e 
+ON e.student_id = s.student_id 
+AND e.subject_name = sub.subject_name
+GROUP BY s.student_id, sub.subject_name
+ORDER BY s.student_id, sub.subject_name;
+```
+
+### Explanation
+
+This SQL query retrieves information about students, the subjects they are associated with, and the count of exams they have attended for each subject. Here’s a detailed breakdown:
+
+1. **FROM Clause**:
+   - The query starts by selecting from the `Students` table (aliased as `s`) and the `Subjects` table (aliased as `sub`).
+   - This creates a Cartesian product of all students and subjects initially.
+
+2. **LEFT JOIN Clause**:
+   - The `Examinations` table (aliased as `e`) is left joined to associate student and subject pairs with any relevant examination records.
+   - The `ON` condition ensures that only rows where the `student_id` and `subject_name` match between the `Examinations` table and the `Students`/`Subjects` combination are included.
+   - If no matching row exists in `Examinations`, the result still includes the student and subject pair, with null values for the `Examinations` table columns.
+
+3. **COUNT(e.subject_name) as attended_exams**:
+   - The `COUNT` function counts the number of non-null `subject_name` entries from the `Examinations` table for each student and subject.
+   - If no exam was attended, the count will be `0` due to the use of the `LEFT JOIN`.
+
+4. **GROUP BY Clause**:
+   - The `GROUP BY` groups the data by `student_id` and `subject_name`, ensuring that the aggregation (e.g., `COUNT`) works on a per-student and per-subject basis.
+
+5. **ORDER BY Clause**:
+   - The results are ordered first by `student_id` and then by `subject_name`.
+   - This makes the output easier to read and organizes information logically by student and subject.
+
+### Use Case
+
+This query is useful in scenarios such as:
+- Generating reports for each student to show how many exams they have attended for each subject.
+- Identifying students who have not attended any exams for certain subjects.
+
+### Example Tables and Results
+
+#### Students Table (`Students`):
+| student_id | student_name |
+|------------|--------------|
+| 1          | Alice        |
+| 2          | Bob          |
+
+#### Subjects Table (`Subjects`):
+| subject_name |
+|--------------|
+| Math         |
+| Science      |
+
+#### Examinations Table (`Examinations`):
+| student_id | subject_name |
+|------------|--------------|
+| 1          | Math         |
+| 1          | Science      |
+| 2          | Math         |
+
+#### Output:
+| student_id | student_name | subject_name | attended_exams |
+|------------|--------------|--------------|-----------------|
+| 1          | Alice        | Math         | 1               |
+| 1          | Alice        | Science      | 1               |
+| 2          | Bob          | Math         | 1               |
+| 2          | Bob          | Science      | 0               |
+
+The output indicates that Alice attended exams for both subjects, while Bob only attended the Math exam an so on.
