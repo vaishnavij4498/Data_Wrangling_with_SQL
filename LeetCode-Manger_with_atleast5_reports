@@ -1,0 +1,12 @@
+# SQL Query to Find Employees Managing at Least Five Employees
+
+The following SQL query identifies employees who manage at least five other employees:
+
+```sql
+SELECT e.name  
+FROM Employee as e
+JOIN Employee as eid
+ON e.id = eid.managerId 
+GROUP BY e.id, e.name
+HAVING COUNT(eid.managerId) >= 5
+ORDER BY e.id, e.name;
