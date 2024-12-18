@@ -8,7 +8,7 @@ GROUP BY si.user_id
 ORDER BY si.user_id
 
 
-###Confirmation Rate:
+/*###Confirmation Rate:
 Table: Signups
 
 +----------------+----------+
