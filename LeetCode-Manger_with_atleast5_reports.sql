@@ -1,4 +1,4 @@
-Table: Employee
+/*Table: Employee
 
 +-------------+---------+
 | Column Name | Type    |
@@ -56,6 +56,7 @@ insert into Employee (id, name, department, managerId) values ('103', 'James', '
 insert into Employee (id, name, department, managerId) values ('104', 'Amy', 'A', '101')
 insert into Employee (id, name, department, managerId) values ('105', 'Anne', 'A', '101')
 insert into Employee (id, name, department, managerId) values ('106', 'Ron', 'B', '101')
+*/
 
 My Solution:
 # Write your MySQL query statement below
