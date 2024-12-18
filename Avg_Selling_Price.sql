@@ -1,4 +1,5 @@
 # Average Selling Price
+# MY SOLUTION
 SELECT p.product_id, 
        COALESCE(ROUND(SUM(u.units * p.price) / NULLIF(SUM(u.units), 0), 2), 0) AS average_price
 FROM Prices AS p
