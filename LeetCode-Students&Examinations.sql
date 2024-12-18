@@ -1,4 +1,4 @@
-LeetCode: Students and Examinations
+/*LeetCode: Students and Examinations
 Table: Students
 
 +---------------+---------+
